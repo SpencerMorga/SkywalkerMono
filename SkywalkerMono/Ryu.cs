@@ -149,6 +149,21 @@ namespace Saiyuki_VS_Skywalker
             };
             animation2.Add(SaiyukiEnums.SaiyukiFrames.Block, block);
 
+            List<Frame> crouch = new List<Frame>()
+            {                                            
+                new Frame(new Rectangle(319, 143, 25, 61), new Vector2()),
+                new Frame(new Rectangle(346, 143, 27, 61), new Vector2()),
+                new Frame(new Rectangle(377, 143, 25, 61), new Vector2()),
+                new Frame(new Rectangle(406, 143, 23, 61), new Vector2()),
+            };
+            animation2.Add(SaiyukiEnums.SaiyukiFrames.Crouch, crouch);
+
+            List<Frame> crouchhit = new List<Frame>()
+            {
+                new Frame(new Rectangle(534, 345, 28, 64), new Vector2()),
+                new Frame(new Rectangle(565, 345, 30, 64), new Vector2()),
+            };
+
             
         }
 
@@ -301,12 +316,13 @@ namespace Saiyuki_VS_Skywalker
                     currentframestate2 = SaiyukiEnums.SaiyukiFrames.Stand;
                 }
             }
-            if (ks.IsKeyDown(Keys.NumPad2))
+            if (ks.IsKeyDown(Keys.NumPad1))
             {
                 currentframestate2 = SaiyukiEnums.SaiyukiFrames.Block;
                 block = true;
             }
-
+            //////////////////////////////////////////////////////////////////
+          //  if (currentframestate2 == SaiyukiEnums.SaiyukiFrames.Crouch)
 
             base.Update(gtime);
         }
