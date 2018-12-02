@@ -90,6 +90,7 @@ namespace Saiyuki_VS_Skywalker
                 new Frame(new Rectangle(118, 143, 23, 60), new Vector2()),
             };
             animation2.Add(SaiyukiEnums.SaiyukiFrames.WalkForward, forward);
+
             List<Frame> backward = new List<Frame>()
             {
                 new Frame(new Rectangle(156, 144, 28, 60), new Vector2()),
@@ -99,17 +100,7 @@ namespace Saiyuki_VS_Skywalker
                 new Frame(new Rectangle(277, 143, 27, 60), new Vector2()),
             };
             animation2.Add(SaiyukiEnums.SaiyukiFrames.WalkBackwards, backward);
-            /*
-            List<Frame > crouch = new List<Frame>()
-            {
-                new Frame(new Rectangle(319, 153, 25, 60), new Vector2()),
-                new Frame(new Rectangle(346, 144, 27, 60), new Vector2()),
-                new Frame(new Rectangle(377, 144, 25, 60), new Vector2()),
-                new Frame(new Rectangle(406, 144, 24, 60), new Vector2()),
-            };
-                
-            animation2.Add(SaiyukiEnums.SaiyukiFrames.Crouch, crouch);
-            */
+
             List <Frame>  jump= new List<Frame>()
             {
                 new Frame(new Rectangle(1, 244, 24, 63), new Vector2()),
@@ -163,8 +154,7 @@ namespace Saiyuki_VS_Skywalker
                 new Frame(new Rectangle(534, 345, 28, 64), new Vector2()),
                 new Frame(new Rectangle(565, 345, 30, 64), new Vector2()),
             };
-
-            
+          
         }
 
         public void Update(GameTime gtime, KeyboardState ks)
