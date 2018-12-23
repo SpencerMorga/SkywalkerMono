@@ -35,7 +35,7 @@ namespace Saiyuki_VS_Skywalker
         public Vector2 Velocity { get { return velocity; } }
         bool isJumping = false;
         float gravity = 0.05f;
-        public int health = 400;
+        public int health = 170;
         public bool punch;
         public bool kick;
         public bool jumppunch;

@@ -74,14 +74,14 @@ namespace Saiyuki_VS_Skywalker
             temp3 = GraphicsDevice.Viewport;
             pixel = new Texture2D(GraphicsDevice, 1, 1);
             pixel.SetData(new Color[] { Color.White });
-            label = new Labels(Color.Black, new Vector2(10,10), Content.Load<SpriteFont>("font"), "Ryu's Health: 400");
+            label = new Labels(Color.Black, new Vector2(10, 10), Content.Load<SpriteFont>("font"), "Ryu's Health: 400");
             label2 = new Labels(Color.Black, new Vector2(270, 10), Content.Load<SpriteFont>("font"), "MBison's Health: 450");
             label3 = new Labels(Color.Black, new Vector2(550, 10), Content.Load<SpriteFont>("font"), "Chun-Li's Health: 400");
             TheForce = new SkywalkerStuff(Content.Load<Texture2D>("skywalker"), new Vector2(600, 6050), new Vector2(3), Color.White, new List<Frame>());
             ryu = new Ryu(Content.Load<Texture2D>("ryu"), new Vector2(400, 350), new Vector2(3), Color.White, new List<Frame>());
             chunli = new Chun_LiStuff(Content.Load<Texture2D>("chun-li"), new Vector2(600, 350), new Vector2(3), Color.White, new List<Frame>());
             mbison = new MBison(Content.Load<Texture2D>("mbison"), new Vector2(200, 350), new Vector2(3), Color.White, new List<Frame>());
-            
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -154,7 +154,7 @@ crouch
             ryu.Update(gameTime, Keyboard.GetState());
             chunli.Update(gameTime, Keyboard.GetState());
             mbison.Update(gameTime, Keyboard.GetState());
-            
+
             base.Update(gameTime);
 
             // THIS IS CHUN LI ATTACK STUFF
@@ -167,11 +167,16 @@ crouch
                     {
                         ryu.health = ryu.health + 0;
                     }
+                    //  else if ()
+                    //    {
+                    //crouch stuff
+                    //    }
                     else
                     {
                         ryu.health--;
                     }
-                    
+
+
                 }
                 else if (chunli.Hitbox.Intersects(mbison.Hitbox))
                 {
@@ -196,6 +201,10 @@ crouch
                     {
                         ryu.health = ryu.health - 2;
                     }
+                    // else if ()
+                    //{
+                    //crouch stuff
+                    //}
                     else
                     {
                         ryu.health = ryu.health - 1;
@@ -224,6 +233,10 @@ crouch
                     {
                         ryu.health = ryu.health - 1;
                     }
+                    //  else if ()
+                    //   {
+                    //crouch stuff
+                    //    }
                     else
                     {
                         ryu.health = ryu.health - 3;
@@ -241,7 +254,7 @@ crouch
                     {
                         mbison.health = mbison.health - 3;
                     }
-                   
+
                 }
             }
             if (chunli.jumpkick == true)
@@ -253,6 +266,10 @@ crouch
                     {
                         ryu.health = ryu.health - 1;
                     }
+                    //  else if ()
+                    ///   {
+                    //      //crouch stuff
+                    //    }
                     else
                     {
                         ryu.health = ryu.health - 2;
@@ -309,7 +326,7 @@ crouch
                 if (ryu.Hitbox.Intersects(mbison.Hitbox))
                 {
                     label2.text = $"MBison's Health: {mbison.health}";
-                    if (mbison.block ==  true)
+                    if (mbison.block == true)
                     {
                         mbison.health = mbison.health - 1;
                     }
@@ -343,7 +360,8 @@ crouch
                 if (ryu.Hitbox.Intersects(mbison.Hitbox))
                 {
                     label2.text = $"MBison's Health: {mbison.health}";
-                    mbison.health = mbison.health - 2;                }
+                    mbison.health = mbison.health - 2;
+                }
                 else if (ryu.Hitbox.Intersects(chunli.Hitbox))
                 {
                     label3.text = $"Chun-li's Health: {chunli.health}";
@@ -375,23 +393,51 @@ crouch
                     {
                         ryu.health = ryu.health - 1;
                     }
+                    // else if ()
+                    // {
+                    //crouch stuff
+                    //  }
                     else
                     {
                         ryu.health = ryu.health - 2;
                     }
                 }
-            }
+            } //FINISH RYU AND CHUN LI BLOCKING STUFF AND MAKE SURE IT IS IDENTICAL TO THE ONES ABOVE WITHOUT THE ACTUAL CODE FOR CROUCHING
             if (mbison.hardpunch == true)
             {
                 if (mbison.Hitbox.Intersects(chunli.Hitbox))
                 {
                     label3.text = $"Chun-li's Health: {chunli.health}";
-                    chunli.health = chunli.health - 3;
+                    if (chunli.block == true)
+                    {
+                        chunli.health = chunli.health - 2;
+                    }
+                    // else if ()
+                    //  {
+                    //crouch stuff
+                    // }
+                    else
+                    {
+                        chunli.health = chunli.health - 3;
+                    }
+
                 }
                 else if (mbison.Hitbox.Intersects(ryu.Hitbox))
                 {
                     label.text = $"Ryu's Health: {ryu.health}";
-                    ryu.health = ryu.health - 3;
+                    if (ryu.block == true)
+                    {
+                        ryu.health = ryu.health - 2;
+                    }
+                    //else if ()
+                    //{
+                    //crouch stuff
+                    // }
+                    else
+                    {
+                        ryu.health = ryu.health - 3;
+                    }
+
                 }
             }
             if (mbison.kick == true)
@@ -399,12 +445,29 @@ crouch
                 if (mbison.Hitbox.Intersects(chunli.Hitbox))
                 {
                     label3.text = $"Chun-li's Health: {chunli.health}";
-                    chunli.health = chunli.health - 2;
+                    if (chunli.block == true)
+                    {
+                        chunli.health = chunli.health - 1;
+                    }
+                    else
+                    {
+                        chunli.health = chunli.health - 2;
+                    }
+
                 }
                 else if (mbison.Hitbox.Intersects(ryu.Hitbox))
                 {
                     label.text = $"Ryu's Health: {ryu.health}";
-                    ryu.health = ryu.health - 3;
+                    if (ryu.block == true)
+                    {
+                        ryu.health = ryu.health - 2;
+                    }
+                    else
+                    {
+                        ryu.health = ryu.health - 3;
+
+                    }
+
                 }
             }
             if (mbison.spinkick == true)
@@ -412,12 +475,27 @@ crouch
                 if (mbison.Hitbox.Intersects(chunli.Hitbox))
                 {
                     label3.text = $"Chun-li's Health: {chunli.health}";
-                    chunli.health = chunli.health - 4;
+                    if (chunli.block == true)
+                    {
+                        chunli.health = chunli.health - 3;
+                    }
+                    else
+                    {
+                        chunli.health = chunli.health - 4;
+                    }
                 }
                 else if (mbison.Hitbox.Intersects(ryu.Hitbox))
                 {
                     label.text = $"Ryu's Health: {ryu.health}";
-                    ryu.health = ryu.health - 4;
+                    if (ryu.block == true)
+                    {
+                        ryu.health = ryu.health - 3;
+                    }
+                    else
+                    {
+                        ryu.health = ryu.health - 4;
+                    }
+
                 }
             }
             if (mbison.psychothingy == true)
@@ -425,12 +503,24 @@ crouch
                 if (mbison.Hitbox.Intersects(chunli.Hitbox))
                 {
                     label3.text = $"Chun-li's Health: {chunli.health}";
-                    chunli.health = chunli.health - 6;
+                    if (chunli.block == true)
+                    {
+                        chunli.health = chunli.health - 400000000;
+                    }
+                    else
+                    {
+                        chunli.health = chunli.health - 20;
+                    }
+
                 }
                 if (mbison.Hitbox.Intersects(ryu.Hitbox))
                 {
                     label.text = $"Ryu's Health: {ryu.health}";
-                    ryu.health = ryu.health - 6;
+                    if (ryu.block == true)
+                    {
+                        ryu.health = ryu.health - 400000000;
+                    }
+                    ryu.health = ryu.health - 20;
                 }
             }
         }
@@ -443,18 +533,23 @@ crouch
         {
             GraphicsDevice.Clear(Color.White);
             //GraphicsDevice.Clear(Color.OliveDrab);
-spriteBatch.Begin();
-            spriteBatch.Draw(backgroundimage, backgroundposition, backgroundcolor); 
+            spriteBatch.Begin();
+            spriteBatch.Draw(backgroundimage, backgroundposition, backgroundcolor);
             TheForce.Draw(spriteBatch);
             ryu.Draw(spriteBatch, pixel);
             chunli.Draw(spriteBatch, pixel);
             mbison.Draw(spriteBatch, pixel);
-            label.Draw(spriteBatch);
+           label.Draw(spriteBatch);
             label2.Draw(spriteBatch);
             label3.Draw(spriteBatch);
-            
+
+
+            spriteBatch.Draw(pixel, new Rectangle(10, 40, ryu.health, 20), Color.Red);
+            spriteBatch.Draw(pixel, new Rectangle(280, 40, mbison.health, 20), Color.White);
+            spriteBatch.Draw(pixel, new Rectangle(570, 40, chunli.health, 20), Color.Green);
+
             spriteBatch.End();
-            
+
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);

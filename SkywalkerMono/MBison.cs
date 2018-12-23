@@ -27,7 +27,7 @@ namespace Saiyuki_VS_Skywalker
         public bool kick;
         public bool spinkick;
         public bool psychothingy;
-        public int health = 450;
+        public int health = 170;
         public bool block;
         public bool hithigh;
         public bool crouch;
@@ -266,6 +266,7 @@ namespace Saiyuki_VS_Skywalker
             {
                 currentframestate5 = MBisonEnums.MBisonFrames.Crouch;
             }
+            /*
             if (hithigh)
             {
                 currentframestate5 = MBisonEnums.MBisonFrames.HitHigh;
@@ -274,6 +275,7 @@ namespace Saiyuki_VS_Skywalker
             {
                 currentframestate5 = MBisonEnums.MBisonFrames.CrouchHit;
             }
+            */
             if (isJumping)
             {
                 velocity.Y -= gravity;
@@ -302,6 +304,7 @@ namespace Saiyuki_VS_Skywalker
                 spinkick = false;
                 psychothingy = false;
                 block = false;
+                crouch = false;
             }
             if (currentframestate5 == MBisonEnums.MBisonFrames.JumpPunch)
             {
