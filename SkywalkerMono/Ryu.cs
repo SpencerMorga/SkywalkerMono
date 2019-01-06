@@ -41,6 +41,9 @@ namespace Saiyuki_VS_Skywalker
         public bool jumppunch;
         public bool jumpkick;
         public bool block = false;
+        public bool crouch = false;
+        public bool crouchhit = false;
+        public bool hithigh = false;
         bool Pastfloor
         {
             get { return position.Y + frames[currentframeIndex].frame.Height > Game1.Viewport2.Height - 16; }
@@ -142,10 +145,17 @@ namespace Saiyuki_VS_Skywalker
 
             List<Frame> crouch = new List<Frame>()
             {                                            
-                new Frame(new Rectangle(319, 143, 25, 61), new Vector2()),
                 new Frame(new Rectangle(346, 143, 27, 61), new Vector2()),
-                new Frame(new Rectangle(377, 143, 25, 61), new Vector2()),
-                new Frame(new Rectangle(406, 143, 23, 61), new Vector2()),
+                new Frame(new Rectangle(346, 143, 27, 61), new Vector2()),
+                new Frame(new Rectangle(346, 143, 27, 61), new Vector2()),
+                new Frame(new Rectangle(346, 143, 27, 61), new Vector2()),
+                new Frame(new Rectangle(346, 143, 27, 61), new Vector2()),
+                new Frame(new Rectangle(346, 143, 27, 61), new Vector2()),
+                new Frame(new Rectangle(346, 143, 27, 61), new Vector2()),
+                new Frame(new Rectangle(346, 143, 27, 61), new Vector2()),
+                new Frame(new Rectangle(346, 143, 27, 61), new Vector2()),
+                new Frame(new Rectangle(346, 143, 27, 61), new Vector2()),
+               
             };
             animation2.Add(SaiyukiEnums.SaiyukiFrames.Crouch, crouch);
 
@@ -154,6 +164,16 @@ namespace Saiyuki_VS_Skywalker
                 new Frame(new Rectangle(534, 345, 28, 64), new Vector2()),
                 new Frame(new Rectangle(565, 345, 30, 64), new Vector2()),
             };
+            animation2.Add(SaiyukiEnums.SaiyukiFrames.Crouchhit, crouchhit);
+
+            List<Frame> hithigh = new List<Frame>()
+            {
+                new Frame(new Rectangle(291, 347, 25, 60), new Vector2()),
+                new Frame(new Rectangle(324, 350, 28, 57), new Vector2()),
+                new Frame(new Rectangle(354, 343, 32, 64), new Vector2()),
+                new Frame(new Rectangle(386, 351, 32, 56), new Vector2()),
+            };
+            animation2.Add(SaiyukiEnums.SaiyukiFrames.Hithigh, hithigh);
           
         }
 
@@ -177,7 +197,22 @@ namespace Saiyuki_VS_Skywalker
             {
                 currentframestate2 = SaiyukiEnums.SaiyukiFrames.JumpKick;
             }
-            if (block) currentframestate2 = SaiyukiEnums.SaiyukiFrames.Block;
+            if (block)
+            {
+                currentframestate2 = SaiyukiEnums.SaiyukiFrames.Block;
+            }
+            if (crouch)
+            {
+                currentframestate2 = SaiyukiEnums.SaiyukiFrames.Crouch;
+            }
+            if (crouchhit)
+            {
+                currentframestate2 = SaiyukiEnums.SaiyukiFrames.Crouchhit;
+            }
+            if (hithigh)
+            {
+                currentframestate2 = SaiyukiEnums.SaiyukiFrames.Hithigh;
+            }
             if (isJumping)
             {
                 velocity.Y -= gravity;
@@ -219,6 +254,7 @@ namespace Saiyuki_VS_Skywalker
                 jumpkick = false;
                 jumppunch = false;
                 block = false;
+                crouch = false;
             }
 
             if (currentframestate2 == SaiyukiEnums.SaiyukiFrames.JumpKick)
@@ -278,6 +314,7 @@ namespace Saiyuki_VS_Skywalker
                 jumppunch = false;
                 jumpkick = false;
                 block = false;
+                crouch = false;
             }
             
             //////////////////////////////////////////////////////////////////
@@ -297,6 +334,7 @@ namespace Saiyuki_VS_Skywalker
                 jumppunch = false;
                 jumpkick = false;
                 block = false;
+                crouch = false;
             }
             //////////////////////////////////////////////////////////////////
             if (currentframestate2 == SaiyukiEnums.SaiyukiFrames.Block)
@@ -312,8 +350,18 @@ namespace Saiyuki_VS_Skywalker
                 block = true;
             }
             //////////////////////////////////////////////////////////////////
-          //  if (currentframestate2 == SaiyukiEnums.SaiyukiFrames.Crouch)
-
+            if (currentframestate2 == SaiyukiEnums.SaiyukiFrames.Crouch)
+            {
+                if (currentframeIndex + 1 >= frames.Count)
+                {
+                    currentframestate2 = SaiyukiEnums.SaiyukiFrames.Stand;
+                }
+            }
+            if (ks.IsKeyDown(Keys.NumPad2))
+            {
+                currentframestate2 = SaiyukiEnums.SaiyukiFrames.Crouch;
+                crouch = true;
+            }
             base.Update(gtime);
         }
     }

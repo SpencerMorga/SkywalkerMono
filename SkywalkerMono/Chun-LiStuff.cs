@@ -37,6 +37,8 @@ namespace Saiyuki_VS_Skywalker
         public bool jumpkick = false;
         public bool block = false;
         public bool crouch = false;
+        public bool crouchhit = false;
+        public bool hithigh = false;
         public int health = 170;
         bool Pastfloor
         {
@@ -187,7 +189,7 @@ namespace Saiyuki_VS_Skywalker
                 new Frame(new Rectangle(571, 121, 33, 60), new Vector2()),
             };
             animation3.Add(Chun_LiEnums.ChunLiFrames.Crouch, crouch);
-            /*
+            
             List<Frame> crouchhit = new List<Frame>()
             {
                 new Frame(new Rectangle(435, 354, 32, 40), new Vector2()),
@@ -202,7 +204,7 @@ namespace Saiyuki_VS_Skywalker
                 new Frame(new Rectangle(545, 336, 35, 58), new Vector2()),
             };
             animation3.Add(Chun_LiEnums.ChunLiFrames.Hithigh, hithigh);
-            */
+            
         }
         public void Update(GameTime gtime, KeyboardState ks)
         {
@@ -230,6 +232,14 @@ namespace Saiyuki_VS_Skywalker
             if (crouch)
             {
                 currentframestate3 = Chun_LiEnums.ChunLiFrames.Crouch;
+            }
+            if (crouchhit)
+            {
+                currentframestate3 = Chun_LiEnums.ChunLiFrames.CrouchHit;
+            }
+            if (hithigh)
+            {
+                currentframestate3 = Chun_LiEnums.ChunLiFrames.Hithigh;
             }
 
 

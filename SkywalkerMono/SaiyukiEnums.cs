@@ -19,7 +19,9 @@ namespace Saiyuki_VS_Skywalker
             JumpPunch,
             JumpKick,
             FallGetUp,
-            Block
+            Block,
+            Crouchhit,
+            Hithigh
         }
 
     }

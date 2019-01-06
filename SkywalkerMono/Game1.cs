@@ -78,9 +78,9 @@ namespace Saiyuki_VS_Skywalker
             label2 = new Labels(Color.Black, new Vector2(270, 10), Content.Load<SpriteFont>("font"), "MBison's Health: 450");
             label3 = new Labels(Color.Black, new Vector2(550, 10), Content.Load<SpriteFont>("font"), "Chun-Li's Health: 400");
             TheForce = new SkywalkerStuff(Content.Load<Texture2D>("skywalker"), new Vector2(600, 6050), new Vector2(3), Color.White, new List<Frame>());
-            ryu = new Ryu(Content.Load<Texture2D>("ryu"), new Vector2(400, 350), new Vector2(3), Color.White, new List<Frame>());
-            chunli = new Chun_LiStuff(Content.Load<Texture2D>("chun-li"), new Vector2(600, 350), new Vector2(3), Color.White, new List<Frame>());
-            mbison = new MBison(Content.Load<Texture2D>("mbison"), new Vector2(200, 350), new Vector2(3), Color.White, new List<Frame>());
+            ryu = new Ryu(Content.Load<Texture2D>("ryu"), new Vector2(400, 400), new Vector2(3), Color.White, new List<Frame>());
+            chunli = new Chun_LiStuff(Content.Load<Texture2D>("chun-li"), new Vector2(600, 400), new Vector2(3), Color.White, new List<Frame>());
+            mbison = new MBison(Content.Load<Texture2D>("mbison"), new Vector2(200, 400), new Vector2(3), Color.White, new List<Frame>());
 
             // TODO: use this.Content to load your game content here
         }
@@ -167,10 +167,10 @@ crouch
                     {
                         ryu.health = ryu.health + 0;
                     }
-                    //  else if ()
-                    //    {
-                    //crouch stuff
-                    //    }
+                    else if (ryu.crouch == true)
+                    {
+                        ryu.health = ryu.health + 0;
+                    }
                     else
                     {
                         ryu.health--;
@@ -182,6 +182,10 @@ crouch
                 {
                     label2.text = $"MBison's Health: {mbison.health}";
                     if (mbison.block == true)
+                    {
+                        mbison.health = mbison.health + 0;
+                    }
+                    else if (mbison.crouch == true)
                     {
                         mbison.health = mbison.health + 0;
                     }
@@ -199,15 +203,15 @@ crouch
                     label.text = $"Ryu's Health: {ryu.health}";
                     if (ryu.block == true)
                     {
+                        ryu.health = ryu.health - 1;
+                    }
+                    else if (ryu.crouch == true)
+                    {
                         ryu.health = ryu.health - 2;
                     }
-                    // else if ()
-                    //{
-                    //crouch stuff
-                    //}
                     else
                     {
-                        ryu.health = ryu.health - 1;
+                        ryu.health = ryu.health - 2;
                     }
 
                 }
@@ -217,6 +221,10 @@ crouch
                     if (mbison.block == true)
                     {
                         mbison.health = mbison.health - 1;
+                    }
+                    else if (mbison.crouch == true)
+                    {
+                        mbison.health = mbison.health - 2;
                     }
                     else
                     {
@@ -233,10 +241,10 @@ crouch
                     {
                         ryu.health = ryu.health - 1;
                     }
-                    //  else if ()
-                    //   {
-                    //crouch stuff
-                    //    }
+                    else if (ryu.crouch == true)
+                    {
+                        ryu.health = ryu.health - 3;
+                    }
                     else
                     {
                         ryu.health = ryu.health - 3;
@@ -249,6 +257,10 @@ crouch
                     if (mbison.block == true)
                     {
                         mbison.health = mbison.health - 1;
+                    }
+                    else if (mbison.crouch == true)
+                    {
+                        mbison.health = mbison.health - 3;
                     }
                     else
                     {
@@ -266,10 +278,10 @@ crouch
                     {
                         ryu.health = ryu.health - 1;
                     }
-                    //  else if ()
-                    ///   {
-                    //      //crouch stuff
-                    //    }
+                    else if (ryu.crouch == true)
+                    {
+                        ryu.health = ryu.health - 2;
+                    }
                     else
                     {
                         ryu.health = ryu.health - 2;
@@ -546,7 +558,7 @@ crouch
 
             spriteBatch.Draw(pixel, new Rectangle(10, 40, ryu.health, 20), Color.Red);
             spriteBatch.Draw(pixel, new Rectangle(280, 40, mbison.health, 20), Color.White);
-            spriteBatch.Draw(pixel, new Rectangle(570, 40, chunli.health, 20), Color.Green);
+            spriteBatch.Draw(pixel, new Rectangle(570, 40, chunli.health, 20), Color.Blue);
 
             spriteBatch.End();
 
