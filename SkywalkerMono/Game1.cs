@@ -295,6 +295,10 @@ crouch
                     {
                         mbison.health = mbison.health - 1;
                     }
+                    else if (mbison.crouch == true)
+                    {
+                        mbison.health = mbison.health - 2;
+                    }
                     else
                     {
                         mbison.health = mbison.health - 2;
@@ -314,6 +318,10 @@ crouch
                     {
                         mbison.health = mbison.health - 2;
                     }
+                    else if (mbison.crouch == true)
+                    {
+                        mbison.health = mbison.health + 0;
+                    }
                     else
                     {
                         mbison.health = mbison.health - 3;
@@ -325,6 +333,10 @@ crouch
                     if (chunli.block == true)
                     {
                         chunli.health = chunli.health - 1;
+                    }
+                    else if (chunli.crouch == true)
+                    {
+                        chunli.health = chunli.health - 0;
                     }
                     else
                     {

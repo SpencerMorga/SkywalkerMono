@@ -21,7 +21,8 @@ namespace Saiyuki_VS_Skywalker
             FallGetUp,
             Block,
             Crouchhit,
-            Hithigh
+            Hithigh,
+            Hadouken
         }
 
     }

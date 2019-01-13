@@ -174,7 +174,25 @@ namespace Saiyuki_VS_Skywalker
                 new Frame(new Rectangle(386, 351, 32, 56), new Vector2()),
             };
             animation2.Add(SaiyukiEnums.SaiyukiFrames.Hithigh, hithigh);
-          
+
+            List<Frame> hadouken = new List<Frame>()
+            {
+                new Frame(new Rectangle(258, 460, 28, 60), new Vector2()),
+                new Frame(new Rectangle(295, 460, 30, 60), new Vector2()),
+               new Frame(new Rectangle(295, 460, 30, 60), new Vector2()),
+               new Frame(new Rectangle(295, 460, 30, 60), new Vector2()),
+                new Frame(new Rectangle(329, 459, 30, 60), new Vector2()),
+                 new Frame(new Rectangle(329, 459, 30, 60), new Vector2()),
+                new Frame(new Rectangle(364, 459, 54, 60), new Vector2()),
+                new Frame(new Rectangle(420, 459, 62, 60), new Vector2()),
+                new Frame(new Rectangle(486, 459, 88, 60), new Vector2()),
+                new Frame(new Rectangle(573, 460, 103, 60), new Vector2()),
+                new Frame(new Rectangle(679, 459, 142, 60), new Vector2()),
+                new Frame(new Rectangle(828, 458, 180, 60), new Vector2()),
+                new Frame(new Rectangle(823, 523, 210, 60), new Vector2()),
+                new Frame(new Rectangle(821, 584, 232, 60), new Vector2()),
+            };
+            animation2.Add(SaiyukiEnums.SaiyukiFrames.Hadouken, hadouken);
         }
 
         public void Update(GameTime gtime, KeyboardState ks)
@@ -361,6 +379,19 @@ namespace Saiyuki_VS_Skywalker
             {
                 currentframestate2 = SaiyukiEnums.SaiyukiFrames.Crouch;
                 crouch = true;
+            }
+            //////////////////////////////////////////////////////////////////
+            if (currentframestate2 == SaiyukiEnums.SaiyukiFrames.Hadouken)
+            {
+                if (currentframeIndex + 1 >= frames.Count)
+                {
+                    currentframestate2 = SaiyukiEnums.SaiyukiFrames.Stand;
+                }
+
+            }
+            if (ks.IsKeyDown(Keys.NumPad3))
+            {
+                currentframestate2 = SaiyukiEnums.SaiyukiFrames.Hadouken;
             }
             base.Update(gtime);
         }
