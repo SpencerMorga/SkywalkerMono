@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 namespace Saiyuki_VS_Skywalker
 {
     public class Ryu : MovingAnimation
@@ -34,7 +33,7 @@ namespace Saiyuki_VS_Skywalker
         Vector2 velocity;
         public Vector2 Velocity { get { return velocity; } }
         bool isJumping = false;
-        float gravity = 0.05f;
+        float gravity = 0.1333333333f;
         public int health = 170;
         public bool punch;
         public bool kick;
@@ -397,4 +396,5 @@ namespace Saiyuki_VS_Skywalker
         }
     }
 }
+
 

@@ -30,7 +30,7 @@ namespace Saiyuki_VS_Skywalker
         Vector2 velocity;
         public Vector2 Velocity { get { return velocity; } }
         bool isJumping = false;
-        float gravity = 0.05f;
+        float gravity = 0.1333333f;
         public bool punch = false;
         public bool regkick = false;
         public bool spinkick = false;

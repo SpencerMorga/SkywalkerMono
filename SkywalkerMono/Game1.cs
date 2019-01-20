@@ -21,6 +21,9 @@ namespace Saiyuki_VS_Skywalker
         Labels label;
         Labels label2;
         Labels label3;
+        Labels omaewamoushindeiru;
+        Labels sasukekun;
+
         SkywalkerStuff TheForce;
         Ryu ryu;
         Chun_LiStuff chunli;
@@ -74,10 +77,12 @@ namespace Saiyuki_VS_Skywalker
             temp3 = GraphicsDevice.Viewport;
             pixel = new Texture2D(GraphicsDevice, 1, 1);
             pixel.SetData(new Color[] { Color.White });
-            label = new Labels(Color.Black, new Vector2(10, 10), Content.Load<SpriteFont>("font"), "Ryu's Health: 400");
-            label2 = new Labels(Color.Black, new Vector2(270, 10), Content.Load<SpriteFont>("font"), "MBison's Health: 450");
-            label3 = new Labels(Color.Black, new Vector2(550, 10), Content.Load<SpriteFont>("font"), "Chun-Li's Health: 400");
-            TheForce = new SkywalkerStuff(Content.Load<Texture2D>("skywalker"), new Vector2(600, 6050), new Vector2(3), Color.White, new List<Frame>());
+            label = new Labels(Color.Black, new Vector2(10, 10), Content.Load<SpriteFont>("font"), "Ryu's Health");
+            label2 = new Labels(Color.Black, new Vector2(270, 10), Content.Load<SpriteFont>("font"), "MBison's Health");
+            label3 = new Labels(Color.Black, new Vector2(550, 10), Content.Load<SpriteFont>("font"), "Chun-Li's Health");
+            sasukekun = new Labels(Color.Red, new Vector2(200, 200), Content.Load<SpriteFont>("font"), "SASUKE-KUN");
+            omaewamoushindeiru = new Labels(Color.Red, new Vector2(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2), Content.Load<SpriteFont>("font"), "OMAE WA MOU SHINDEIRU");
+            TheForce = new SkywalkerStuff(Content.Load<Texture2D>("skywalker"), new Vector2(600, 500), new Vector2(3), Color.White, new List<Frame>());
             ryu = new Ryu(Content.Load<Texture2D>("ryu"), new Vector2(400, 400), new Vector2(3), Color.White, new List<Frame>());
             chunli = new Chun_LiStuff(Content.Load<Texture2D>("chun-li"), new Vector2(600, 400), new Vector2(3), Color.White, new List<Frame>());
             mbison = new MBison(Content.Load<Texture2D>("mbison"), new Vector2(200, 400), new Vector2(3), Color.White, new List<Frame>());
@@ -90,52 +95,7 @@ namespace Saiyuki_VS_Skywalker
         /// all content.
         /// </summary>
         /// chun-li
-        /*
-        hit high
-620, 244, 31, 50
-580, 344, 34, 50
-545, 336, 35, 58
 
-crouch hit
-435, 354, 32, 40
-40, 255, 32, 39
-
-crouch
-572, 142, 32, 39
-
-	ryu
-
-hit high
-291, 347, 25, 60
-324, 350, 28, 57
-354, 343, 32, 64
-386, 351, 32, 56
-
-crouch hit
-534, 367, 28, 42
-565, 367, 30, 42
-
-crouch
-39, 13, 25 51
-436, 162, 27, 42
-377, 153, 25, 51
-406, 144, 23, 60
-
-	mbison
-
-hit high
-3, 348, 44, 63
-49, 347, 44, 64
-95, 348, 37, 63
-
-crouch hit
-304, 360, 45, 51
-351, 353, 44, 58
-
-crouch
-152, 145, 44, 49
-199, 154, 45, 40
-*/
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
@@ -354,6 +314,10 @@ crouch
                     {
                         mbison.health = mbison.health - 1;
                     }
+                    else if (mbison.crouch == true)
+                    {
+                        mbison.health = mbison.health - 2;
+                    }
                     else
                     {
                         mbison.health = mbison.health - 2;
@@ -363,7 +327,19 @@ crouch
                 else if (ryu.Hitbox.Intersects(chunli.Hitbox))
                 {
                     label3.text = $"Chun-li's Health: {chunli.health}";
-                    chunli.health = chunli.health - 2;
+                    if (chunli.block == true)
+                    {
+                        chunli.health = chunli.health - 1;
+                    }
+                    else if (chunli.crouch == true)
+                    {
+                        chunli.health = chunli.health - 2;
+                    }
+                    else
+                    {
+                        chunli.health = chunli.health - 2;
+                    }
+
                 }
             }
             if (ryu.jumppunch == true)
@@ -371,12 +347,32 @@ crouch
                 if (ryu.Hitbox.Intersects(mbison.Hitbox))
                 {
                     label2.text = $"MBison's Health: {mbison.health}";
+                    if (mbison.block == true)
+                    {
+                        mbison.health = mbison.health - 1;
+                    }
+                    else if (mbison.crouch == true)
+                    {
+                        mbison.health = mbison.health - 3;
+                    }
                     mbison.health = mbison.health - 3;
                 }
                 else if (ryu.Hitbox.Intersects(chunli.Hitbox))
                 {
                     label3.text = $"Chun-li's Health: {chunli.health}";
-                    chunli.health = chunli.health - 3;
+                    if (chunli.block == true)
+                    {
+                        chunli.health = chunli.health - 1;
+                    }
+                    else if (chunli.block == true)
+                    {
+                        chunli.health = chunli.health - 3;
+                    }
+                    else
+                    {
+                        chunli.health = chunli.health - 3;
+                    }
+
                 }
             }
             if (ryu.jumpkick == true)
@@ -384,7 +380,19 @@ crouch
                 if (ryu.Hitbox.Intersects(mbison.Hitbox))
                 {
                     label2.text = $"MBison's Health: {mbison.health}";
-                    mbison.health = mbison.health - 2;
+                    if (mbison.block == true)
+                    {
+                        mbison.health = mbison.health - 1;
+                    }
+                    else if (mbison.crouch == true)
+                    {
+                        mbison.health = mbison.health - 2;
+                    }
+                   // else ()
+                    //{
+                     //   mbison.health = mbison.health - 2;
+                    //}
+
                 }
                 else if (ryu.Hitbox.Intersects(chunli.Hitbox))
                 {
@@ -404,6 +412,10 @@ crouch
                     {
                         chunli.health = chunli.health - 1;
                     }
+                    else if (chunli.crouch == true)
+                    {
+                        chunli.health = chunli.health - 2;
+                    }
                     else
                     {
                         chunli.health = chunli.health - 2;
@@ -417,16 +429,16 @@ crouch
                     {
                         ryu.health = ryu.health - 1;
                     }
-                    // else if ()
-                    // {
-                    //crouch stuff
-                    //  }
+                    else if (ryu.crouch == true)
+                    {//rawrXD
+                        ryu.health = ryu.health - 0;
+                    }//rawrXD
                     else
                     {
                         ryu.health = ryu.health - 2;
                     }
                 }
-            } //FINISH RYU AND CHUN LI BLOCKING STUFF AND MAKE SURE IT IS IDENTICAL TO THE ONES ABOVE WITHOUT THE ACTUAL CODE FOR CROUCHING
+            }
             if (mbison.hardpunch == true)
             {
                 if (mbison.Hitbox.Intersects(chunli.Hitbox))
@@ -566,6 +578,8 @@ crouch
            label.Draw(spriteBatch);
             label2.Draw(spriteBatch);
             label3.Draw(spriteBatch);
+            omaewamoushindeiru.Draw(spriteBatch);
+            sasukekun.Draw(spriteBatch);
 
 
             spriteBatch.Draw(pixel, new Rectangle(10, 40, ryu.health, 20), Color.Red);
