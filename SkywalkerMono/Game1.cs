@@ -24,6 +24,8 @@ namespace Saiyuki_VS_Skywalker
         Labels omaewamoushindeiru;
         Labels sasukekun;
 
+       
+
         SkywalkerStuff TheForce;
         Ryu ryu;
         Chun_LiStuff chunli;
@@ -80,8 +82,8 @@ namespace Saiyuki_VS_Skywalker
             label = new Labels(Color.Black, new Vector2(10, 10), Content.Load<SpriteFont>("font"), "Ryu's Health");
             label2 = new Labels(Color.Black, new Vector2(270, 10), Content.Load<SpriteFont>("font"), "MBison's Health");
             label3 = new Labels(Color.Black, new Vector2(550, 10), Content.Load<SpriteFont>("font"), "Chun-Li's Health");
-            sasukekun = new Labels(Color.Red, new Vector2(200, 200), Content.Load<SpriteFont>("font"), "SASUKE-KUN");
-            omaewamoushindeiru = new Labels(Color.Red, new Vector2(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2), Content.Load<SpriteFont>("font"), "OMAE WA MOU SHINDEIRU");
+            sasukekun = new Labels(Color.Red, new Vector2(200, 200), Content.Load<SpriteFont>("font"), "bakugo x kirishima");
+           omaewamoushindeiru = new Labels(Color.Red, new Vector2(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2), Content.Load<SpriteFont>("font"), "OMAE WA MOU SHINDEIRU");
             TheForce = new SkywalkerStuff(Content.Load<Texture2D>("skywalker"), new Vector2(600, 500), new Vector2(3), Color.White, new List<Frame>());
             ryu = new Ryu(Content.Load<Texture2D>("ryu"), new Vector2(400, 400), new Vector2(3), Color.White, new List<Frame>());
             chunli = new Chun_LiStuff(Content.Load<Texture2D>("chun-li"), new Vector2(600, 400), new Vector2(3), Color.White, new List<Frame>());
@@ -134,6 +136,8 @@ namespace Saiyuki_VS_Skywalker
                     else
                     {
                         ryu.health--;
+                        ryu.hithigh = true;
+                       
                     }
 
 
@@ -152,6 +156,7 @@ namespace Saiyuki_VS_Skywalker
                     else
                     {
                         mbison.health--;
+                        mbison.hithigh = true;
                     }
 
                 }
@@ -189,6 +194,7 @@ namespace Saiyuki_VS_Skywalker
                     else
                     {
                         mbison.health = mbison.health - 2;
+                        mbison.hithigh = true;
                     }
                 }
             }
@@ -208,6 +214,7 @@ namespace Saiyuki_VS_Skywalker
                     else
                     {
                         ryu.health = ryu.health - 3;
+                        ryu.hithigh = true;
                     }
 
                 }
@@ -225,6 +232,7 @@ namespace Saiyuki_VS_Skywalker
                     else
                     {
                         mbison.health = mbison.health - 3;
+                        mbison.hithigh = true;
                     }
 
                 }
@@ -245,6 +253,7 @@ namespace Saiyuki_VS_Skywalker
                     else
                     {
                         ryu.health = ryu.health - 2;
+                        ryu.hithigh = true;
                     }
 
                 }
@@ -262,6 +271,7 @@ namespace Saiyuki_VS_Skywalker
                     else
                     {
                         mbison.health = mbison.health - 2;
+                        mbison.hithigh = true;
                     }
                 }
             }
@@ -388,16 +398,64 @@ namespace Saiyuki_VS_Skywalker
                     {
                         mbison.health = mbison.health - 2;
                     }
-                   // else ()
-                    //{
-                     //   mbison.health = mbison.health - 2;
-                    //}
+                    else
+                    {
+                        mbison.health = mbison.health - 2;
+                    }
 
                 }
                 else if (ryu.Hitbox.Intersects(chunli.Hitbox))
                 {
                     label3.text = $"Chun-li's Health: {chunli.health}";
-                    chunli.health = chunli.health - 2;
+                    if (chunli.block == true)
+                    {
+                        chunli.health = chunli.health - 1;
+                    }
+                    else if (chunli.crouch == true)
+                    {
+                        chunli.health = chunli.health - 2;
+                    }
+                    else
+                    {
+                        chunli.health = chunli.health - 2;
+                    }
+                }
+
+                
+            }
+            if (ryu.hadouken == true)
+            {
+                if (ryu.Hitbox.Intersects(mbison.Hitbox))
+               {
+                    label2.text = $"MBison's Health: {mbison.health}";
+                    if (mbison.block == true)
+                    {
+                        mbison.health = mbison.health - 9000;
+                    }
+                    else if (mbison.crouch == true)
+                    {
+                        mbison.health = mbison.health - 9000;
+                    }
+                    else
+                    {
+                        mbison.health = mbison.health - 9000;
+                    }
+                }
+                else if (ryu.Hitbox.Intersects(chunli.Hitbox))
+                {
+                    label3.text = $"Chun-li's Health: {chunli.health}";
+                    if (chunli.block == true)
+                    {
+                        chunli.health = chunli.health - 9000;
+                    }
+                    else if (chunli.crouch == true)
+                    {
+                        chunli.health = chunli.health - 9000;
+                    }
+                    else
+                    {
+                        chunli.health = chunli.health - 9000;
+                    }
                 }
             }
             //END OF RYU ATTACK STUFF
@@ -448,10 +506,10 @@ namespace Saiyuki_VS_Skywalker
                     {
                         chunli.health = chunli.health - 2;
                     }
-                    // else if ()
-                    //  {
-                    //crouch stuff
-                    // }
+                    else if (chunli.crouch == true)
+                    {
+                        chunli.health = chunli.health - 1;
+                    }
                     else
                     {
                         chunli.health = chunli.health - 3;
@@ -465,10 +523,10 @@ namespace Saiyuki_VS_Skywalker
                     {
                         ryu.health = ryu.health - 2;
                     }
-                    //else if ()
-                    //{
-                    //crouch stuff
-                    // }
+                    else if (ryu.crouch == true)
+                    {
+                        ryu.health = ryu.health - 1;
+                    }
                     else
                     {
                         ryu.health = ryu.health - 3;
@@ -485,11 +543,14 @@ namespace Saiyuki_VS_Skywalker
                     {
                         chunli.health = chunli.health - 1;
                     }
+                    else if (chunli.crouch == true)
+                    {
+                        chunli.health = chunli.health - 2;
+                    }
                     else
                     {
                         chunli.health = chunli.health - 2;
                     }
-
                 }
                 else if (mbison.Hitbox.Intersects(ryu.Hitbox))
                 {
@@ -498,12 +559,14 @@ namespace Saiyuki_VS_Skywalker
                     {
                         ryu.health = ryu.health - 2;
                     }
+                    else if (ryu.crouch == true)
+                    {
+                        ryu.health = ryu.health - 3;
+                    }
                     else
                     {
                         ryu.health = ryu.health - 3;
-
                     }
-
                 }
             }
             if (mbison.spinkick == true)
@@ -514,6 +577,10 @@ namespace Saiyuki_VS_Skywalker
                     if (chunli.block == true)
                     {
                         chunli.health = chunli.health - 3;
+                    }
+                    else if (chunli.crouch == true)
+                    {
+                        chunli.health = chunli.health - 4;
                     }
                     else
                     {
@@ -527,13 +594,17 @@ namespace Saiyuki_VS_Skywalker
                     {
                         ryu.health = ryu.health - 3;
                     }
+                    else if (ryu.crouch == true)
+                    {
+                        ryu.health = ryu.health - 4;
+                    }
                     else
                     {
                         ryu.health = ryu.health - 4;
                     }
-
                 }
             }
+            
             if (mbison.psychothingy == true)
             {
                 if (mbison.Hitbox.Intersects(chunli.Hitbox))
@@ -578,13 +649,16 @@ namespace Saiyuki_VS_Skywalker
            label.Draw(spriteBatch);
             label2.Draw(spriteBatch);
             label3.Draw(spriteBatch);
-            omaewamoushindeiru.Draw(spriteBatch);
+           
+                omaewamoushindeiru.Draw(spriteBatch);
+            
+            //omaewamoushindeiru.Draw(spriteBatch);
             sasukekun.Draw(spriteBatch);
 
 
-            spriteBatch.Draw(pixel, new Rectangle(10, 40, ryu.health, 20), Color.Red);
-            spriteBatch.Draw(pixel, new Rectangle(280, 40, mbison.health, 20), Color.White);
-            spriteBatch.Draw(pixel, new Rectangle(570, 40, chunli.health, 20), Color.Blue);
+            spriteBatch.Draw(pixel, new Rectangle(10, 40, ryu.health, 20), Color.Goldenrod);
+            spriteBatch.Draw(pixel, new Rectangle(280, 40, mbison.health, 20), Color.Goldenrod);
+            spriteBatch.Draw(pixel, new Rectangle(570, 40, chunli.health, 20), Color.Goldenrod);
 
             spriteBatch.End();
 

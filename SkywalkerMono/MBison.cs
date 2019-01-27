@@ -32,6 +32,7 @@ namespace Saiyuki_VS_Skywalker
         public bool hithigh;
         public bool crouch;
         public bool crouchhit;
+        
         bool Pastfloor
         {
             get { return position.Y + frames[currentframeIndex].frame.Height > Game1.Viewport3.Height - 14; }
@@ -266,7 +267,7 @@ namespace Saiyuki_VS_Skywalker
             {
                 currentframestate5 = MBisonEnums.MBisonFrames.Crouch;
             }
-            /*
+            
             if (hithigh)
             {
                 currentframestate5 = MBisonEnums.MBisonFrames.HitHigh;
@@ -275,7 +276,7 @@ namespace Saiyuki_VS_Skywalker
             {
                 currentframestate5 = MBisonEnums.MBisonFrames.CrouchHit;
             }
-            */
+            
             if (isJumping)
             {
                 velocity.Y -= gravity;
@@ -399,6 +400,7 @@ namespace Saiyuki_VS_Skywalker
                 currentframestate5 = MBisonEnums.MBisonFrames.PsychoThingy;
                 position.X += speed.X * 3;
                 psychothingy = true;
+                
             }
             ////////////////////////////////////////////////////////////////////
             if (currentframestate5 == MBisonEnums.MBisonFrames.Forward)
